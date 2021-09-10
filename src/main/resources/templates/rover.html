@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Mars Rover</title>
+</head>
+<body>
+<form action="#" id="roverForm" th:action="@{/move}" th:object="${coordinates}" method="POST">
+	<h2>Mars Rover: Comprehension 2030(maybe)</h2>
+
+	<div class="form-row">
+		<label for="plateauX">Plateau Size X</label>
+		<input type="number" id="plateauX" name="plateauX"
+		       placeholder=0>
+		<label for="plateauY">Plateau Size Y</label>
+		<input type="number" id="plateauY" name="plateauY"
+		       placeholder=0>
+	</div>
+
+
+	<div class="form-row mx-auto">
+		<button type="submit" class="btn-submit" id="btnSubmit">Submit</button>
+	</div>
+</form>
+</body>
+</html>
