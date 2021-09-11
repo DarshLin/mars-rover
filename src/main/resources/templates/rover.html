@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Mars Rover</title>
+	<meta charset="UTF-8">
+	<title>Rover Results</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<form action="#" id="roverForm" th:action="@{/move}" th:object="${coordinates}" method="POST">
-	<h2>Mars Rover: Comprehension 2030(maybe)</h2>
+<h2>Mars Rover: Comprehension - Please enter directions for each unit</h2>
+<h4>Plateau Size: <span id="plateauX" th:text="${plateau.getSizeX()}"></span>
+	<span id="plateauY" th:text="${plateau.getSizeY()}"></span></h4>
 
-	<div class="form-row">
-		<label for="plateauX">Plateau Size X</label>
-		<input type="number" id="plateauX" name="plateauX"
-		       placeholder=0>
-		<label for="plateauY">Plateau Size Y</label>
-		<input type="number" id="plateauY" name="plateauY"
-		       placeholder=0>
-	</div>
+<form method="post" action="">
 
-	<div id="container">
-		Number of Rovers: <input type="number" id="unit" name="unit" value=""><br/>
-		<button id="unitsBtn" onclick="addRoverUnits()">Add</button>
-	</div>
-
-	<div class="form-row mx-auto">
-		<button type="submit" class="btn-submit" id="btnSubmit">Submit</button>
-	</div>
 </form>
+
 </body>
 </html>
