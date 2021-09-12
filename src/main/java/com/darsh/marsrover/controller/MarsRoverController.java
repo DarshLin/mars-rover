@@ -33,8 +33,6 @@ public class MarsRoverController {
         plateauService.createPlateauOnMars(mars, plateau.getSizeX(), plateau.getSizeY());
         model.addAttribute("plateau", plateau);
 
-        System.out.println(mars.getPlateau().getSizeX() + " " + mars.getPlateau().getSizeY());
-
         return "rover";
     }
 }

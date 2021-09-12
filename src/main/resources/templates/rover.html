@@ -3,16 +3,97 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Rover Results</title>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!--	<script th:inline="javascript">-->
+	<!--		$(document).ready(function () {-->
+	<!--			/*<![CDATA[*/-->
+	<!--			let maxX = /*[[${plateau.getSizeX()}]]*/0;-->
+	<!--			let maxY = /*[[${plateau.getSizeY()}]]*/0;-->
+	<!--			/*]]>*/-->
+	<!--			let inputX = document.getElementById("inputX").max = maxX;-->
+	<!--			let inputY = document.getElementById("inputY").max = maxY;-->
+	<!--		});-->
+	<!--	</script>-->
+
+
+	<script th:inline="javascript">
+		$(document).ready(function () {
+			/*<![CDATA[*/
+			let maxX = /*[[${plateau.getSizeX()}]]*/0;
+			let maxY = /*[[${plateau.getSizeY()}]]*/0;
+			/*]]>*/
+			document.getElementById("inputX").max = maxX;
+			document.getElementById("inputY").max = maxY;
+		});
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			let addButton = $('.addButton');
+			let wrapper = $('.wrapper');
+			let fieldScript =
+										'<script th:inline="javascript"> ' +
+					'$(document).ready(function () { ' +
+					'/*<![CDATA[*/' +
+					'let maxX = /*[[${plateau.getSizeX()}]]*/0; ' +
+					'let maxY = /*[[${plateau.getSizeY()}]]*/0; ' +
+					'/*]]>*/' +
+					'document.getElementById("inputX").max = maxX; ' +
+					'document.getElementById("inputY").max = maxY; ' +
+					'});' +
+					'</script> '
+			let fieldHTML = '<div>' +
+					'X<input type="number" name="rover[posX]" id="inputX" min="0" max="" value="0" required/> ' +
+					'Y<input type="number" name="rover[posY]" id="inputX" min="0" max="" value="0"  required/> ' +
+					'Direction<select name="rover[direction]">' +
+					'<option value="N">N</option>' +
+					'<option value="S">S</option>' +
+					'<option value="E">E</option>' +
+					'<option value="W">W</option>' +
+					'</select> ' +
+					'Instructions<input type="text" name="instructions" placeholder="LMR"/> ' +
+					'<a href="javascript:void(0);" class="removeButton">Remove</a>' +
+					'<br>' +
+					'</div>'
+
+			$(addButton).click(function (e) {
+				$(wrapper).append(fieldHTML);
+			});
+
+			$(wrapper).on('click', '.removeButton', function (e) {
+				e.preventDefault();
+				$(this).parent('div').remove();
+			});
+		});
+	</script>
+
 </head>
 <body>
 <h2>Mars Rover: Comprehension - Please enter directions for each unit</h2>
-<h4>Plateau Size: <span id="plateauX" th:text="${plateau.getSizeX()}"></span>
-	<span id="plateauY" th:text="${plateau.getSizeY()}"></span></h4>
+<h4>Plateau Size:
+	<span id="plateauX" th:text="${plateau.getSizeX()}"></span>
+	<span id="plateauY" th:text="${plateau.getSizeY()}"></span>
+</h4>
 
-<form method="post" action="">
-
+<h4>Enter Coordinates and Instructions for Rovers</h4>
+<form action="#" id="roverForm" th:action="@{/result}" th:object="${rovers}" method="POST">
+	<div class="container">
+		<div class="wrapper">
+			<div>
+				X<input type="number" name="rover[posX]" id="inputX" min="0" max="" value="0" required/>
+				Y<input type="number" name="rover[posY]" id="inputY" min="0" max="" value="0" required/>
+				Direction<select name="rover[direction]">
+				<option value="N">N</option>
+				<option value="S">S</option>
+				<option value="E">E</option>
+				<option value="W">W</option>
+			</select>
+				Instructions<input type="text" name="instructions" placeholder="LMR"/>
+				<a href="javascript:void(0);" class="addButton" title="Add Rover">Add Rover</a>
+			</div>
+		</div>
+	</div>
+	<input type="submit" name="submit" value="Submit Instructions"/>
 </form>
-
 </body>
 </html>
