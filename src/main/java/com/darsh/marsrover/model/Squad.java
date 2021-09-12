@@ -4,16 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Rover {
+public class Squad {
 
-    private Integer posX;
+    private List<Rover> rovers;
 
-    private Integer posY;
 
-    private Character direction;
-
-    private String instructions;
 }

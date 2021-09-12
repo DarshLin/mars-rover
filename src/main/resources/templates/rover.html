@@ -4,33 +4,65 @@
 	<meta charset="UTF-8">
 	<title>Rover Results</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		async function handleFormSubmit(e) {
+			e.preventDefault();
+			const form = e.currentTarget;
+			const url = form.action;
+
+			try {
+				const formData = new FormData(form);
+				const responseData = await postFormDataAsJson({url, formData});
+				console.log({responseData})
+			} catch (err) {
+				console.log(err);
+			}
+		}
+
+		async function postFormDataAsJson({url, formData}) {
+			const plainFormData = Object.fromEntries(formData.entries());
+			const formDataJsonString = JSON.stringify(plainFormData);
+			const fetchOptions = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"Accept": "application/json"
+				},
+				body: formDataJsonString
+			};
+			const response = await fetch(url, fetchOptions);
+			if(!response.ok) {
+				const errMsg = await response.text();
+				throw new Error(errMsg);
+			}
+			return response.json();
+		}
+
+		$(document).ready(function () {
+			const roverForm = document.getElementById("roverForm");
+			roverForm.addEventListener("submit", handleFormSubmit);
+		})
+	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {
+			let i = 1;
 			let addButton = $('.addButton');
 			let wrapper = $('.wrapper');
-			let fieldHTML = '<div>' +
-					'X<input type="number" name="rover[posX]" id="inputX" min="0" max="" value="0" required/> ' +
-					'Y<input type="number" name="rover[posY]" id="inputX" min="0" max="" value="0"  required/> ' +
-					'Direction<select name="rover[direction]">' +
-					'<option value="N">N</option>' +
-					'<option value="S">S</option>' +
-					'<option value="E">E</option>' +
-					'<option value="W">W</option>' +
-					'</select> ' +
-					'Instructions<input type="text" name="instructions" placeholder="LMR"/> ' +
-					'<a href="javascript:void(0);" class="removeButton">Remove</a>' +
-					'<br>' +
-					'</div>'
-			$(addButton).click(function (e) {
+			$(addButton).click(function () {
+				let fieldHTML = `<div> X<input type="number" name="rover[${i}][posX]" id="inputX" min="0" max="" value="0" required/> Y<input type="number" name="rover[${i}][posY]" id="inputX" min="0" max="" value="0"  required/> Direction<select name="rover[${i}][direction]"> <option value="N">N</option> <option value="S">S</option> <option value="E">E</option> <option value="W">W</option> </select> Instructions<input type="text" name="rover[${i}][instructions]" placeholder="LMR"/> <a href="javascript:void(0);" class="removeButton">Remove</a> <br> </div>`
+				i++;
+				console.log(i);
 				$(wrapper).append(fieldHTML);
 			});
 
 			$(wrapper).on('click', '.removeButton', function (e) {
 				e.preventDefault();
 				$(this).parent('div').remove();
+				i--;
 			});
 		});
 	</script>
+
 
 </head>
 <body>
@@ -42,24 +74,26 @@
 
 <h4>Enter Coordinates and Instructions for Rovers</h4>
 <h4>NOTE: If entering coordinates more than plateau size, it will default to plateau size. </h4>
-<form action="#" id="roverForm" th:action="@{/result}" th:object="${rovers}" method="POST">
+<form action="#" id="roverForm" th:action="@{/result}" th:object="${squad}" method="POST">
 	<div class="container">
 		<div class="wrapper">
 			<div>
-				X<input type="number" name="rover[posX]" id="inputX" min="0" max="" value="0" required/>
-				Y<input type="number" name="rover[posY]" id="inputY" min="0" max="" value="0" required/>
-				Direction<select name="rover[direction]">
+				X<input type="number" name="rover[0][posX]" id="inputX" min="0" max="" value="0" required/>
+				Y<input type="number" name="rover[0][posY]" id="inputY" min="0" max="" value="0" required/>
+				Direction<select name="rover[0][direction]">
 				<option value="N">N</option>
 				<option value="S">S</option>
 				<option value="E">E</option>
 				<option value="W">W</option>
 			</select>
-				Instructions<input type="text" name="instructions" placeholder="LMR"/>
+				Instructions<input type="text" name="rover[0][instructions]" placeholder="LMR"/>
 				<a href="javascript:void(0);" class="addButton" title="Add Rover">Add Rover</a>
 			</div>
 		</div>
 	</div>
 	<input type="submit" name="submit" value="Submit Instructions"/>
 </form>
+
+
 </body>
 </html>
