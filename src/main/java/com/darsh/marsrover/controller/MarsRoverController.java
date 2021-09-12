@@ -1,8 +1,7 @@
 package com.darsh.marsrover.controller;
 
 import com.darsh.marsrover.model.Mars;
-import com.darsh.marsrover.model.Rover;
-import com.darsh.marsrover.model.Squad;
+import com.darsh.marsrover.service.MarsService;
 import com.darsh.marsrover.service.PlateauService;
 import com.darsh.marsrover.service.RoverService;
 import com.darsh.marsrover.model.Plateau;
@@ -13,29 +12,23 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Controller
 public class MarsRoverController {
 
     @Autowired
-    RoverService roverService;
+    MarsService marsService;
 
     @Autowired
     PlateauService plateauService;
+
+    @Autowired
+    RoverService roverService;
 
     public static Mars mars = new Mars();
 
@@ -56,19 +49,19 @@ public class MarsRoverController {
     @PostMapping(path = "/result")
     public String processRoverInstructions(@RequestParam MultiValueMap<String, String> squad) {
 
-        Map<String,String> params = new HashMap<>();
+        Map<String,String> rovers = new HashMap<>();
 
         Iterator<String> it = squad.keySet().iterator();
 
         while(it.hasNext()) {
-            String key = (String)it.next();
-            params.put(key, squad.getFirst(key));
+            String key = it.next();
+            rovers.put(key, squad.getFirst(key));
         }
 
-        for(Map.Entry<String, String> e :params.entrySet()) {
-            System.out.println(e.getKey()+ " " + e.getValue());
-        }
+        marsService.populateMarsWithRovers(mars, rovers);
 
+
+        roverService.moveRover(mars);
 
         return "result";
     }

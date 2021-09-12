@@ -9,5 +9,5 @@ public class Mars {
 
     private Plateau plateau;
 
-    private Squad squad;
+    private List<Rover> rovers;
 }

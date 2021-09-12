@@ -4,45 +4,6 @@
 	<meta charset="UTF-8">
 	<title>Rover Results</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<!--	<script>-->
-	<!--		async function handleFormSubmit(e) {-->
-	<!--			e.preventDefault();-->
-	<!--			const form = e.currentTarget;-->
-	<!--			const url = form.action;-->
-
-	<!--			try {-->
-	<!--				const formData = new FormData(form);-->
-	<!--				const responseData = await postFormDataAsJson({url, formData});-->
-	<!--				console.log({responseData})-->
-	<!--			} catch (err) {-->
-	<!--				console.log(err);-->
-	<!--			}-->
-	<!--		}-->
-
-	<!--		async function postFormDataAsJson({url, formData}) {-->
-	<!--			const plainFormData = Object.fromEntries(formData.entries());-->
-	<!--			const formDataJsonString = JSON.stringify(plainFormData);-->
-	<!--			const fetchOptions = {-->
-	<!--				method: "POST",-->
-	<!--				headers: {-->
-	<!--					"Content-Type": "application/json",-->
-	<!--					"Accept": "application/json"-->
-	<!--				},-->
-	<!--				body: formDataJsonString-->
-	<!--			};-->
-	<!--			const response = await fetch(url, fetchOptions);-->
-	<!--			if(!response.ok) {-->
-	<!--				const errMsg = await response.text();-->
-	<!--				throw new Error(errMsg);-->
-	<!--			}-->
-	<!--			return response.json();-->
-	<!--		}-->
-
-	<!--		$(document).ready(function () {-->
-	<!--			const roverForm = document.getElementById("roverForm");-->
-	<!--			roverForm.addEventListener("submit", handleFormSubmit);-->
-	<!--		})-->
-	<!--	</script>-->
 	<script type="text/javascript">
 		$(document).ready(function () {
 			let i = 1;
@@ -61,28 +22,6 @@
 			});
 		});
 	</script>
-
-<!--	<script type="text/javascript">-->
-<!--		$(document).ready(function () {-->
-<!--			$('#roverForm').submit(function (e) {-->
-<!--				let arr = $(this).serializeArray();-->
-<!--				// let arr = JSON.parse($(this))-->
-<!--				// let arrJ = JSON.stringify(arr)-->
-<!--				let p = JSON.parse(arr);-->
-<!--				let json = JSON.stringify(p);-->
-
-<!--				// console.log(JSON.stringify(arr));-->
-
-<!--					console.log(json);-->
-
-
-<!--				return false;-->
-<!--			});-->
-
-
-<!--		});-->
-<!--	</script>-->
-
 </head>
 <body>
 <h2>Mars Rover: Comprehension - Please enter directions for each unit</h2>
@@ -110,6 +49,7 @@
 			</div>
 		</div>
 	</div>
+	<br>
 	<input type="submit" name="submit" value="Execute Commands"/>
 </form>
 
