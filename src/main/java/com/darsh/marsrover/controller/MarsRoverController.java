@@ -9,6 +9,7 @@ import com.darsh.marsrover.model.Plateau;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +54,21 @@ public class MarsRoverController {
 
 
     @PostMapping(path = "/result")
-    public String processRoverInstructions(@RequestBody Squad squad) {
+    public String processRoverInstructions(@RequestParam MultiValueMap<String, String> squad) {
+
+        Map<String,String> params = new HashMap<>();
+
+        Iterator<String> it = squad.keySet().iterator();
+
+        while(it.hasNext()) {
+            String key = (String)it.next();
+            params.put(key, squad.getFirst(key));
+        }
+
+        for(Map.Entry<String, String> e :params.entrySet()) {
+            System.out.println(e.getKey()+ " " + e.getValue());
+        }
+
 
         return "result";
     }

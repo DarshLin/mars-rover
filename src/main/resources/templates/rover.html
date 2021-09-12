@@ -3,46 +3,46 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Rover Results</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script>
-		async function handleFormSubmit(e) {
-			e.preventDefault();
-			const form = e.currentTarget;
-			const url = form.action;
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!--	<script>-->
+	<!--		async function handleFormSubmit(e) {-->
+	<!--			e.preventDefault();-->
+	<!--			const form = e.currentTarget;-->
+	<!--			const url = form.action;-->
 
-			try {
-				const formData = new FormData(form);
-				const responseData = await postFormDataAsJson({url, formData});
-				console.log({responseData})
-			} catch (err) {
-				console.log(err);
-			}
-		}
+	<!--			try {-->
+	<!--				const formData = new FormData(form);-->
+	<!--				const responseData = await postFormDataAsJson({url, formData});-->
+	<!--				console.log({responseData})-->
+	<!--			} catch (err) {-->
+	<!--				console.log(err);-->
+	<!--			}-->
+	<!--		}-->
 
-		async function postFormDataAsJson({url, formData}) {
-			const plainFormData = Object.fromEntries(formData.entries());
-			const formDataJsonString = JSON.stringify(plainFormData);
-			const fetchOptions = {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"Accept": "application/json"
-				},
-				body: formDataJsonString
-			};
-			const response = await fetch(url, fetchOptions);
-			if(!response.ok) {
-				const errMsg = await response.text();
-				throw new Error(errMsg);
-			}
-			return response.json();
-		}
+	<!--		async function postFormDataAsJson({url, formData}) {-->
+	<!--			const plainFormData = Object.fromEntries(formData.entries());-->
+	<!--			const formDataJsonString = JSON.stringify(plainFormData);-->
+	<!--			const fetchOptions = {-->
+	<!--				method: "POST",-->
+	<!--				headers: {-->
+	<!--					"Content-Type": "application/json",-->
+	<!--					"Accept": "application/json"-->
+	<!--				},-->
+	<!--				body: formDataJsonString-->
+	<!--			};-->
+	<!--			const response = await fetch(url, fetchOptions);-->
+	<!--			if(!response.ok) {-->
+	<!--				const errMsg = await response.text();-->
+	<!--				throw new Error(errMsg);-->
+	<!--			}-->
+	<!--			return response.json();-->
+	<!--		}-->
 
-		$(document).ready(function () {
-			const roverForm = document.getElementById("roverForm");
-			roverForm.addEventListener("submit", handleFormSubmit);
-		})
-	</script>
+	<!--		$(document).ready(function () {-->
+	<!--			const roverForm = document.getElementById("roverForm");-->
+	<!--			roverForm.addEventListener("submit", handleFormSubmit);-->
+	<!--		})-->
+	<!--	</script>-->
 	<script type="text/javascript">
 		$(document).ready(function () {
 			let i = 1;
@@ -51,7 +51,6 @@
 			$(addButton).click(function () {
 				let fieldHTML = `<div> X<input type="number" name="rover[${i}][posX]" id="inputX" min="0" max="" value="0" required/> Y<input type="number" name="rover[${i}][posY]" id="inputX" min="0" max="" value="0"  required/> Direction<select name="rover[${i}][direction]"> <option value="N">N</option> <option value="S">S</option> <option value="E">E</option> <option value="W">W</option> </select> Instructions<input type="text" name="rover[${i}][instructions]" placeholder="LMR"/> <a href="javascript:void(0);" class="removeButton">Remove</a> <br> </div>`
 				i++;
-				console.log(i);
 				$(wrapper).append(fieldHTML);
 			});
 
@@ -63,6 +62,26 @@
 		});
 	</script>
 
+<!--	<script type="text/javascript">-->
+<!--		$(document).ready(function () {-->
+<!--			$('#roverForm').submit(function (e) {-->
+<!--				let arr = $(this).serializeArray();-->
+<!--				// let arr = JSON.parse($(this))-->
+<!--				// let arrJ = JSON.stringify(arr)-->
+<!--				let p = JSON.parse(arr);-->
+<!--				let json = JSON.stringify(p);-->
+
+<!--				// console.log(JSON.stringify(arr));-->
+
+<!--					console.log(json);-->
+
+
+<!--				return false;-->
+<!--			});-->
+
+
+<!--		});-->
+<!--	</script>-->
 
 </head>
 <body>
@@ -91,7 +110,7 @@
 			</div>
 		</div>
 	</div>
-	<input type="submit" name="submit" value="Submit Instructions"/>
+	<input type="submit" name="submit" value="Execute Commands"/>
 </form>
 
 
