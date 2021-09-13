@@ -5,6 +5,26 @@
 	<title>Title</title>
 </head>
 <body>
-
+<div class="container">
+	<div th:if="${not #lists.isEmpty(rovers)}">
+		<h2>Resulting locations of Mars Rovers</h2>
+		<table class="rover-table">
+			<tr>
+				<th>X Position</th>
+				<th>Y Position</th>
+				<th>Direction</th>
+			</tr>
+			<tr th:each="rover : ${rovers}">
+				<td th:text="${rover.getPosX()}"></td>
+				<td th:text="${rover.getPosY()}"></td>
+				<td th:text="${rover.getDirection()}"></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<br>
+<a href="/index">
+	<input type="button" value="Planet(plan it) again!"/>
+</a>
 </body>
 </html>

@@ -47,7 +47,7 @@ public class MarsRoverController {
 
 
     @PostMapping(path = "/result")
-    public String processRoverInstructions(@RequestParam MultiValueMap<String, String> squad) {
+    public String processRoverInstructions(@RequestParam MultiValueMap<String, String> squad, Model model) {
 
         Map<String,String> rovers = new HashMap<>();
 
@@ -59,9 +59,8 @@ public class MarsRoverController {
         }
 
         marsService.populateMarsWithRovers(mars, rovers);
-
-
         roverService.moveRover(mars);
+        model.addAttribute("rovers", mars.getRovers());
 
         return "result";
     }
