@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlateauService {
 
+    /**
+     * Creates and sets the plateau on mars
+     * @param mars the thing plateau is made on
+     * @param x horizontal axis
+     * @param y vertical axis
+     */
     public void createPlateauOnMars(Mars mars, Integer x, Integer y) {
         //Check that x and y aren't negative
         x = x < 0 ? 0 : x;

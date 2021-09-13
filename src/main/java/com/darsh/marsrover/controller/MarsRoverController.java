@@ -32,11 +32,21 @@ public class MarsRoverController {
 
     public static Mars mars = new Mars();
 
+    /**
+     * Creates the first page of the app
+     * @return the first page
+     */
     @GetMapping(path = "/index")
     public String getCoordinates() {
         return "/index";
     }
 
+    /**
+     * sends plateau information for rover page
+     * @param plateau constructed plateau from plateau service
+     * @param model sends model attributes of plateau to be usable in rover page
+     * @return rover page
+     */
     @PostMapping(path = "/rover")
     public String submitCoordinates(@ModelAttribute Plateau plateau, Model model) {
         plateauService.createPlateauOnMars(mars, plateau.getSizeX(), plateau.getSizeY());
@@ -45,17 +55,22 @@ public class MarsRoverController {
         return "rover";
     }
 
-
+    /**
+     * Moves the rovers and sends results to result page
+     * @param blueprints payload from html from post coming in from rover page
+     * @param model sends final positions of rovers to result page
+     * @return result page
+     */
     @PostMapping(path = "/result")
-    public String processRoverInstructions(@RequestParam MultiValueMap<String, String> squad, Model model) {
+    public String processRoverInstructions(@RequestParam MultiValueMap<String, String> blueprints, Model model) {
 
         Map<String,String> rovers = new HashMap<>();
 
-        Iterator<String> it = squad.keySet().iterator();
+        Iterator<String> it = blueprints.keySet().iterator();
 
         while(it.hasNext()) {
             String key = it.next();
-            rovers.put(key, squad.getFirst(key));
+            rovers.put(key, blueprints.getFirst(key));
         }
 
         marsService.populateMarsWithRovers(mars, rovers);

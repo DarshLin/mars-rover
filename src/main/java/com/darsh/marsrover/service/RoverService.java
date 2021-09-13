@@ -7,6 +7,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoverService {
 
+    private final char NORTH = 'N';
+    private final char EAST = 'E';
+    private final char SOUTH = 'S';
+    private final char WEST = 'W';
+
+    /**
+     * Uses loop that only takes correct inputs for instructions (L,R,M) lower and upper
+     * Ignores all other characters
+     * @param mars has all the rovers with their instructions and positions
+     */
     public void moveRover(Mars mars) {
 
         int boundaryX = mars.getPlateau().getSizeX();
@@ -23,29 +33,34 @@ public class RoverService {
                     rightTurn(r);
                 }
             }
-//            System.out.println("X: " + r.getPosX() + " Y: " + r.getPosY() + " Direction: " + r.getDirection());
         }
     }
 
+    /**
+     * Moves based on direction using a switch case
+     * @param rover
+     * @param boundaryX furthest right
+     * @param boundaryY furthest up
+     */
     private void move(Rover rover, int boundaryX, int boundaryY) {
 
         switch (Character.toUpperCase(rover.getDirection())) {
-            case 'N':
+            case NORTH:
                 if (!outOfBounds(boundaryY, rover.getPosY() + 1)) {
                     rover.setPosY(rover.getPosY() + 1);
                 }
                 break;
-            case 'E':
+            case EAST:
                 if (!outOfBounds(boundaryX, rover.getPosX() + 1)) {
                     rover.setPosX(rover.getPosX() + 1);
                 }
                 break;
-            case 'S':
+            case SOUTH:
                 if (!outOfBounds(boundaryY, rover.getPosY() - 1)) {
                     rover.setPosY(rover.getPosY() - 1);
                 }
                 break;
-            case 'W':
+            case WEST:
                 if (!outOfBounds(boundaryX, rover.getPosX() - 1)) {
                     rover.setPosX(rover.getPosX() - 1);
                 }
@@ -56,46 +71,60 @@ public class RoverService {
 
     }
 
+    /**
+     * Turns cardinal direction counterclockwise
+     * @param rover
+     */
     private void leftTurn(Rover rover) {
 
         switch (Character.toUpperCase(rover.getDirection())) {
-            case 'N':
-                rover.setDirection('W');
+            case NORTH:
+                rover.setDirection(WEST);
                 break;
-            case 'E':
-                rover.setDirection('N');
+            case EAST:
+                rover.setDirection(NORTH);
                 break;
-            case 'S':
-                rover.setDirection('E');
+            case SOUTH:
+                rover.setDirection(EAST);
                 break;
-            case 'W':
-                rover.setDirection('S');
+            case WEST:
+                rover.setDirection(SOUTH);
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * Turns cardinal direction clockwise
+     * @param rover
+     */
     private void rightTurn(Rover rover) {
 
         switch (Character.toUpperCase(rover.getDirection())) {
-            case 'N':
-                rover.setDirection('E');
+            case NORTH:
+                rover.setDirection(EAST);
                 break;
-            case 'E':
-                rover.setDirection('S');
+            case EAST:
+                rover.setDirection(SOUTH);
                 break;
-            case 'S':
-                rover.setDirection('W');
+            case SOUTH:
+                rover.setDirection(WEST);
                 break;
-            case 'W':
-                rover.setDirection('N');
+            case WEST:
+                rover.setDirection(NORTH);
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * Makes sure rover is in bound
+     * @param boundary most top and right rover can go
+     * @param coordinate rovers coordinate after movement
+     * @return true or false that it is out of bounds
+     */
     private boolean outOfBounds(int boundary, int coordinate) {
         return boundary < coordinate || coordinate < 0;
     }
