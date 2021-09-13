@@ -1,13 +1,7 @@
 # Mars-Rover: brought to you by Darsh Lin
 
-##Project Made using
-* Java 8 - Main coding language
-* Apache Maven 3.6.3 - Running console commands and packaging
-* Spring-Boot 3.5.4 - Main framework
-* Spring Boot Web - Deployment
-* Spring Boot Thymeleaf - Link HTML to Spring
-* Lombok - Readability annotations (E.g., @Data for getters and setters)
-* JUnit 5 - Testing
+###Introduction:
+
 
 ###Brief description:
 Mars rover project that allows user to set a rectangular plateau and then deploy rovers with coordinates on them. 
@@ -23,6 +17,7 @@ The plateau and coordinates are to be entered in html input boxes and are done i
 * Rover cannot move outside bounds of 0 -> plateau size X or Y. Java code will skip movement instruction.
 * Rover instructions can be blank. Just means it will deploy and not move.
 * Rover instructions can be any string. Will only take L,M,R,l,m,r as working instructions.
+* Plateau and Rover X and Y cannot pass integer limit. Will default to integer max. Max on HTML and check in Java for movement
 
 ###Module Locations:
 * Main Java/Spring-Boot code: `src/main/java/com/darsh/marsrover`
@@ -57,11 +52,19 @@ There are two ways to run the main project:
 * Deploying on top of another rover - I decided that it would be very tricky and inefficient to figure out the locations of other rovers before deploying a new one as the project description does not talk about how to best do this so it kind of would just come down to either not deploying the next rover or putting it in a random spot that's "safe" which could be a problem given that infinite rovers can be deployed.
 * Crashing into another rover - Another case the project description didn't address is what happens when one rover ends up in the same spot as a previous rover. It would be as simple as just not executing the move instruction against a HashSet to see where each other rover is. However, following the logic of not deploying on top of another rover, I decided that it would make more sense and think that infinite rovers can occupy the same spot.
 * Limit on number of rovers - Most people won't be clicking "Add Rover"  2147483647 times I imagine, but I thought of limiting the number of rovers that can be deployed.
-* Limit on X and Y for both Plateau and rover coordinates/movement - Another thing I considered that the project description didn't address, but it didn't seem too likely to happen. Would have been as easy as putting a max limit on the html input.
 
 ###Testing Thoughts:
 * Selenium Testing - I did consider Selenium testing for the HTML. However, it takes quite a bit of time to set up both for myself and anyone else who wants to pull and test it.
 * Unit Testing - There are unit tests for all the services but there isn't anything for the controller. This is because the controller's only purpose is to push data to be viewed on the front so as long as the front moves as it should, it's all fine.
 I also didn't test a lot of the methods on the different services because they all served a single purpose and making them public would be bad practice. So I just tested the main public method as much as possible.
   
+##Project Made using
+* Java 8 - Main coding language
+* Apache Maven 3.6.3 - Running console commands and packaging
+* Spring-Boot 3.5.4 - Main framework
+* Spring Boot Web - Deployment
+* Spring Boot Thymeleaf - Link HTML to Spring
+* Lombok - Readability annotations (E.g., @Data for getters and setters)
+* JUnit 5 - Testing
+
 ## Enjoy moving all rOver Mars!

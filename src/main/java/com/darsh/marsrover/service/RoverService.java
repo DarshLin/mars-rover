@@ -12,6 +12,8 @@ public class RoverService {
     private final char SOUTH = 'S';
     private final char WEST = 'W';
 
+    private final Integer MAX = Integer.MAX_VALUE;
+
     /**
      * Uses loop that only takes correct inputs for instructions (L,R,M) lower and upper
      * Ignores all other characters
@@ -126,6 +128,6 @@ public class RoverService {
      * @return true or false that it is out of bounds
      */
     private boolean outOfBounds(int boundary, int coordinate) {
-        return boundary < coordinate || coordinate < 0;
+        return boundary < coordinate || coordinate < 0 || coordinate == MAX;
     }
 }
