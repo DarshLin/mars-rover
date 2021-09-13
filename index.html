@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="refresh" content="0; url=https://repo.github.io/src/main/resources/templates/index.html">
-	<title>Title</title>
+	<title>Mars Rover</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-
+<form action="#" id="plateauForm" th:action="@{/rover}" th:object="${plateau}" method="POST">
+	<h2>Mars Rover: Comprehension 2030 (maybe)</h2>
+	<h3>Please enter the size of the plateau</h3>
+	<div class="form-row">
+		<label for="sizeX">Plateau Size X</label>
+		<input class="coordinate-input" type="number" id="sizeX" name="sizeX"
+		       min="0" value="0" required/>
+		<label for="sizeY">Plateau Size Y</label>
+		<input class="coordinate-input" type="number" id="sizeY" name="sizeY"
+		       min="0" value="0" required/>
+	</div>
+	<br/>
+	<div class="form-row mx-auto">
+		<button type="submit" class="btn-submit" id="btnSubmit">Submit</button>
+	</div>
+</form>
 </body>
 </html>
