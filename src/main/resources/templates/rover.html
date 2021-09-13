@@ -28,9 +28,11 @@
 <h4>Plateau Size:
 	<span id="plateauX" th:text="${plateau.getSizeX()}"></span>
 	<span id="plateauY" th:text="${plateau.getSizeY()}"></span>
+	<br/>
 </h4>
 
 <h4>Enter Coordinates and Instructions for Rovers</h4>
+<br/>
 <h4>NOTE: If entering coordinates more than plateau size, it will default to plateau size. </h4>
 <form action="#" id="roverForm" th:action="@{/result}" th:object="${squad}" method="POST">
 	<div class="container">
@@ -49,10 +51,8 @@
 			</div>
 		</div>
 	</div>
-	<br>
+	<br/>
 	<input type="submit" name="submit" value="Execute Commands"/>
 </form>
-
-
 </body>
 </html>

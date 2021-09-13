@@ -8,13 +8,12 @@
 <form action="#" id="plateauForm" th:action="@{/rover}" th:object="${plateau}" method="POST">
 	<h2>Mars Rover: Comprehension 2030 (maybe)</h2>
 	<h3>Please enter the size of the plateau</h3>
-
 	<div class="form-row">
 		<label for="sizeX">Plateau Size X</label>
-		<input type="number" id="sizeX" name="sizeX"
+		<input class="coordinate-input" type="number" id="sizeX" name="sizeX"
 		       min="0" value="0" required/>
 		<label for="sizeY">Plateau Size Y</label>
-		<input type="number" id="sizeY" name="sizeY"
+		<input class="coordinate-input" type="number" id="sizeY" name="sizeY"
 		       min="0" value="0" required/>
 	</div>
 
