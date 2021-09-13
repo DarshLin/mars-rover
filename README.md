@@ -4,10 +4,10 @@
 
 
 ###Brief description:
-Mars rover project that allows user to set a rectangular plateau and then deploy rovers with coordinates on them. 
+Mars rover project that allows user to set a rectangular plateau and then deploy rovers with directions given to them. 
 The plateau and coordinates are to be entered in html input boxes and are done in sequential order as follows:
-1. Plateau size X and Y
-2. Rover starting X and Y coordinates, starting cardinal direction, and instructions. Rovers can also be added and removed with no limit on the number of rovers that can be added.
+1. Plateau size X and Y. Clicking "Submit button" creates the plateau
+2. Rover starting X and Y coordinates, starting cardinal direction, and instructions. Rovers can also be added and removed. Clicking "Deploy Rovers" Executes instructions for rovers and shows the results
 3. Clicking the "Planet (Plan it) again" button brings user back to the Plateau page.
 
 ####Edge Cases Implemented:
