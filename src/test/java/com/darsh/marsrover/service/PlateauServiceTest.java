@@ -75,6 +75,28 @@ class PlateauServiceTest {
         final int expected = 3;
         int actual = mars.getPlateau().getSizeY();
 
-        assertEquals(expected, mars.getPlateau().getSizeY());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createPlateauOnMars_AssignXMaxInt_AssertsMaxInt() {
+        Mars mars = new Mars();
+        plateauService.createPlateauOnMars(mars, Integer.MAX_VALUE, 0);
+
+        final int expected = Integer.MAX_VALUE;
+        int actual = mars.getPlateau().getSizeX();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createPlateauOnMars_AssignYMaxInt_AssertsMaxInt() {
+        Mars mars = new Mars();
+        plateauService.createPlateauOnMars(mars, 0, Integer.MAX_VALUE);
+
+        final int expected = Integer.MAX_VALUE;
+        int actual = mars.getPlateau().getSizeY();
+
+        assertEquals(expected, actual);
     }
 }

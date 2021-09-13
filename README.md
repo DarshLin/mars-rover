@@ -19,6 +19,7 @@ The plateau and coordinates are to be entered in html input boxes and are done i
 * Rover instructions can be any string - Will only take L,M,R,l,m,r as working instructions.
 * Plateau and Rover X and Y cannot pass integer limit - Will default to integer max. Max on HTML and check in Java for movement.
 * Limit on number of Rovers deployed - Only 1000 units can be deployed limited by HTML. This is because every machine is different, and the Java Map limit is about 2^30 seemed like a lot.
+* Cardinal directions should only be N,E,S,W. This is done through HTML limiting it to 4 inputs through a drop box.
 
 ###Module Locations:
 * Main Java/Spring-Boot code: `src/main/java/com/darsh/marsrover`

@@ -68,6 +68,49 @@ class RoverServiceTest {
     }
 
     @Test
+    void moveRover_MovePastIntLimitOnX_AssertsMaxInt() {
+        final int MAX = Integer.MAX_VALUE;
+        Mars mars = new Mars();
+        Plateau plateau = new Plateau(MAX, MAX);
+
+        Rover rover = new Rover(MAX, MAX, 'N', "MMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+        List<Rover> rovers = new ArrayList<>();
+        rovers.add(rover);
+
+        mars.setPlateau(plateau);
+        mars.setRovers(rovers);
+
+        roverService.moveRover(mars);
+
+        final int expectedX = MAX;
+        int actualX = mars.getRovers().get(0).getPosX();
+
+        assertEquals(expectedX, actualX);
+    }
+
+    @Test
+    void moveRover_MovePastIntLimitOnY_AssertsMaxInt() {
+        final int MAX = Integer.MAX_VALUE;
+        Mars mars = new Mars();
+        Plateau plateau = new Plateau(MAX, MAX);
+
+        Rover rover = new Rover(MAX, MAX, 'E', "MMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+        List<Rover> rovers = new ArrayList<>();
+        rovers.add(rover);
+
+        mars.setPlateau(plateau);
+        mars.setRovers(rovers);
+
+        roverService.moveRover(mars);
+
+        final int expectedY = MAX;
+        int actualY = mars.getRovers().get(0).getPosY();
+
+        assertEquals(expectedY, actualY);
+    }
+
+
+    @Test
     void moveRover_MoveN_AssertsYPlus1() {
         Mars mars = new Mars();
         Plateau plateau = new Plateau(0, 1);
