@@ -11,13 +11,14 @@ The plateau and coordinates are to be entered in html input boxes and are done i
 3. Clicking the "Planet (Plan it) again" button brings user back to the Plateau page.
 
 ####Edge Cases Implemented:
-* Plateau XY sizes cannot be negative. HTML page will not allow user to proceed with negative X or Y. Java code sets negative to 0 for redundancy.
-* Rover coordinates cannot be negative. This is done the same way as with Plateau.
-* Rover coordinates cannot exceed Plateau size. Java code sets entered coordinates to plateau size.
-* Rover cannot move outside bounds of 0 -> plateau size X or Y. Java code will skip movement instruction.
-* Rover instructions can be blank. Just means it will deploy and not move.
-* Rover instructions can be any string. Will only take L,M,R,l,m,r as working instructions.
-* Plateau and Rover X and Y cannot pass integer limit. Will default to integer max. Max on HTML and check in Java for movement
+* Plateau XY sizes cannot be negative - HTML page will not allow user to proceed with negative X or Y. Java code sets negative to 0 for redundancy.
+* Rover coordinates cannot be negative - This is done the same way as with Plateau.
+* Rover coordinates cannot exceed Plateau size - Java code sets entered coordinates to plateau size.
+* Rover cannot move outside bounds of 0 -> plateau size X or Y - Java code will skip movement instruction.
+* Rover instructions can be blank - Just means it will deploy and not move.
+* Rover instructions can be any string - Will only take L,M,R,l,m,r as working instructions.
+* Plateau and Rover X and Y cannot pass integer limit - Will default to integer max. Max on HTML and check in Java for movement.
+* Limit on number of Rovers deployed - Only 1000 units can be deployed limited by HTML. This is because every machine is different, and the Java Map limit is about 2^30 seemed like a lot.
 
 ###Module Locations:
 * Main Java/Spring-Boot code: `src/main/java/com/darsh/marsrover`
@@ -51,7 +52,6 @@ There are two ways to run the main project:
 ###Edge Cases Considered:
 * Deploying on top of another rover - I decided that it would be very tricky and inefficient to figure out the locations of other rovers before deploying a new one as the project description does not talk about how to best do this so it kind of would just come down to either not deploying the next rover or putting it in a random spot that's "safe" which could be a problem given that infinite rovers can be deployed.
 * Crashing into another rover - Another case the project description didn't address is what happens when one rover ends up in the same spot as a previous rover. It would be as simple as just not executing the move instruction against a HashSet to see where each other rover is. However, following the logic of not deploying on top of another rover, I decided that it would make more sense and think that infinite rovers can occupy the same spot.
-* Limit on number of rovers - Most people won't be clicking "Add Rover"  2147483647 times I imagine, but I thought of limiting the number of rovers that can be deployed.
 
 ###Testing Thoughts:
 * Selenium Testing - I did consider Selenium testing for the HTML. However, it takes quite a bit of time to set up both for myself and anyone else who wants to pull and test it.

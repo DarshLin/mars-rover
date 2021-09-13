@@ -31,13 +31,15 @@ public class MarsService {
             String direction = "rover[" + i + "][direction]";
             String instructions = "rover[" + i + "][instructions]";
 
-            //create new rover to put into squad
-            roverSquad.add(new Rover(
-                    Integer.parseInt(blueprints.get(posX)) < mars.getPlateau().getSizeX() ? Integer.parseInt(blueprints.get(posX)) : mars.getPlateau().getSizeX(), //make sure positions are not away from the grid
-                    Integer.parseInt(blueprints.get(posY)) < mars.getPlateau().getSizeY() ? Integer.parseInt(blueprints.get(posY)) : mars.getPlateau().getSizeY(),
-                    blueprints.get(direction).charAt(0),
-                    blueprints.get(instructions) == null ? "" : blueprints.get(instructions)
-            ));
+            if(blueprints.containsKey(posX)) {
+                roverSquad.add(new Rover(
+                        Integer.parseInt(blueprints.get(posX)) < mars.getPlateau().getSizeX() ? Integer.parseInt(blueprints.get(posX)) : mars.getPlateau().getSizeX(), //make sure positions are not away from the grid
+                        Integer.parseInt(blueprints.get(posY)) < mars.getPlateau().getSizeY() ? Integer.parseInt(blueprints.get(posY)) : mars.getPlateau().getSizeY(),
+                        blueprints.get(direction).charAt(0),
+                        blueprints.get(instructions) == null ? "" : blueprints.get(instructions)
+                ));
+            }
+
             checkForNegativeCoordinates(roverSquad.get(roverSquad.size() - 1));
 
             removeRoverFromBlueprints(blueprints, posX, posY, direction, instructions);
