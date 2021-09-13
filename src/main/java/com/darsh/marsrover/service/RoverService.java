@@ -27,7 +27,7 @@ public class RoverService {
         }
     }
 
-    private int[] move(Rover rover, int boundaryX, int boundaryY) {
+    private void move(Rover rover, int boundaryX, int boundaryY) {
 
         switch (Character.toUpperCase(rover.getDirection())) {
             case 'N':
@@ -54,10 +54,9 @@ public class RoverService {
                 break;
         }
 
-        return new int[]{rover.getPosX(), rover.getPosY()};
     }
 
-    private char leftTurn(Rover rover) {
+    private void leftTurn(Rover rover) {
 
         switch (Character.toUpperCase(rover.getDirection())) {
             case 'N':
@@ -75,10 +74,9 @@ public class RoverService {
             default:
                 break;
         }
-        return rover.getDirection();
     }
 
-    private char rightTurn(Rover rover) {
+    private void rightTurn(Rover rover) {
 
         switch (Character.toUpperCase(rover.getDirection())) {
             case 'N':
@@ -96,10 +94,9 @@ public class RoverService {
             default:
                 break;
         }
-        return rover.getDirection();
     }
 
     private boolean outOfBounds(int boundary, int coordinate) {
-        return boundary < coordinate && coordinate >= 0;
+        return boundary < coordinate || coordinate < 0;
     }
 }
